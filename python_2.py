@@ -1,8 +1,11 @@
 # encoding=utf-8
 # 迭代
-f = open('base.md', 'r')
-F = iter(f)
-F.__next__()
+with open('base.md', 'r') as f:
+    F = iter(f)
+# F.__next__()
+# pythonic的文件读写方式，一次循环返回一行，延迟读取
+for line in open('base.md', 'r'):
+    pass
 
 # 列表推导
 source = 'span'
@@ -14,4 +17,5 @@ map(ord, source)
 new_list = [x+y+z for x in 'soe' for y in 'ef' for z in '12']
 new_list = [x+y+z for x in 'soe' if x != 's' for y in 'ef' for z in '12']
 
-# 生成器函数
+# 生成器语句
+new_list = (x+y+z for x in 'soe' for y in 'ef' for z in '12')

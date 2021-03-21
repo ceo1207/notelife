@@ -42,6 +42,9 @@ slot, super, 类方法
 
 + 多线程
 
+Windows 的进程模型和 Linux 不一样，Windows 下没有 os.fork，但是unix有。
+Python 提供了一个 multiprocessing 模块，利用它，我们可以来编写跨平台的多进程程序，但需要注意的是 multiprocessing 在 Windows 和 Linux 平台的不一致性。
+
 + 异常处理
 
 + 源码解读
