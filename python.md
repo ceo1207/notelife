@@ -8,6 +8,8 @@
 编码，在cmd运行时，常常需要使用系统使用的编码，比如windows的cmd需要将字符，encoding为gbk。
 
 ## 要点
+### 迭代
+
 + 迭代
 
 `iter(variable)`获得对象的迭代器（iterator），用来迭代该对象。
@@ -26,42 +28,9 @@ new_list = [x+y+z for x in 'soe' if x != 's' for y in 'ef' for z in '12']
 
 生成器函数会被自动编译为生成器对象，添加`__next`成员函数。
 
-+ 高阶函数
+### 函数
 
-返回函数的函数。相当于是对某一函数的加工处理。
-
-+ 模块
- 
-import的逻辑
-
-python的热更
-
-+ 类
-
-slot, super, 类方法
-
-+ 多线程
-
-Windows 的进程模型和 Linux 不一样，Windows 下没有 os.fork，但是unix有。
-Python 提供了一个 multiprocessing 模块，利用它，我们可以来编写跨平台的多进程程序，但需要注意的是 multiprocessing 在 Windows 和 Linux 平台的不一致性。
-
-+ 异常处理
-
-+ 源码解读
-读、写逻辑是不同的。在类继承等结构中尤其注意。
-
-## 杂知识点
-+ zip
-```
-a = [[1,2,3], [1,2,3], [1,2,3]]
-b = [[1,2,], [1,2,], [1,2,],]
-for i, j in zip(a,b):
-    print i, j
-```
-
-
-
-
+返回函数的函数成为高阶函数。相当于是对某一函数的加工处理。
 
 **匿名函数的语法**
 匿名函数不管多复杂，只能写一行，且执行完结果就是返回值。
@@ -79,10 +48,8 @@ map/reduce/filter
 map(int, ['1', '2',])
 
 ```
-
-
 **闭包 closure**
-一个函数返回了一个内部函数，该内部函数引用了外部函数的相关参数和变量，我们把该返回的内部函数称为闭包（Closure）。
+一个函数返回了一个内部函数，该内部函数引用了外部函数的相关参数和变量，我们把该返回的内部函数称为闭包（Closure）。内部函数为闭包。
 
 函数中定义函数，变量的作用域问题。函数可以访问函数外部的变量。
 ```
@@ -119,4 +86,67 @@ def count():
 **装饰器**
 用的不多，用的时候经常略有模糊的概念。
 
-**面向对象**
+### 模块
+ 
+import的逻辑
+
+
+
++ 多线程
+
+Windows 的进程模型和 Linux 不一样，Windows 下没有 os.fork，但是unix有。
+Python 提供了一个 multiprocessing 模块，利用它，我们可以来编写跨平台的多进程程序，但需要注意的是 multiprocessing 在 Windows 和 Linux 平台的不一致性。
+
+### 异常处理
+
+**语法简述**
+
+ELSE 是没有异常时运行的代码。python2的语法还允许使用逗号语法，`Exception, e:`.
+```
+try:
+    raise IndexError
+except IndexError as e:
+    print 'IndexError'
+except:
+    print 'any error'
+else:
+    print 'no error'
+finally:
+    print 'Done'
+```
+
+**RAISE**
+
+`raise IndexError`和`raise IndexError()`是等价的，当遇到自定义exception需要传入值进行init时，就使用后者。
+
+在except语句中，可以单独使用`raise`，会向上抛出异常。   
+
+**查看调用栈**
+
+使用traceback，可以清晰地查看python的调用栈。非常有用！！
+```
+import traceback
+traceback.print_stack()
+```
+
++ 源码解读
+读、写逻辑是不同的。在类继承等结构中尤其注意。
+
+
+python的热更
+
++ 面向对象
+
+slot, super, 类方法
+
+
+## 杂知识点
++ zip
+```
+a = [[1,2,3], [1,2,3], [1,2,3]]
+b = [[1,2,], [1,2,], [1,2,],]
+for i, j in zip(a,b):
+    print i, j
+```
+
+
